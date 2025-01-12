@@ -1,0 +1,115 @@
+Here are the language rules for the VintLang programming language based on the provided code:
+
+---
+
+## **1. Syntax and Structure**
+
+### Comments
+- **Single-line comments:** Use `//`.
+- **Multi-line comments:** Enclose in `/* */`.
+
+### Variable Declaration
+- Declare variables with `let`.
+- Variables can store strings, numbers, objects, arrays, and functions.
+
+### Modules
+- Import modules using `import module_name`.
+
+---
+
+## **2. Data Types**
+- **Primitive types:** `INTEGER`, `STRING`, `BOOLEAN`, `FLOAT`.
+- **Complex types:** Objects (`{}`) and Arrays (`[]`).
+
+---
+
+## **3. Operators**
+- **Arithmetic:** `+`, `-`, `*`, `/`, `%`.
+- **Comparison:** `==`, `!=`, `<`, `>`, `<=`, `>=`.
+- **Logical:** `&&`, `||`, `!`.
+
+---
+
+## **4. Functions**
+- Define functions with the syntax:
+  ```vintlang
+  let functionName = func(param1, param2) {
+      // Function body
+  }
+  ```
+- Call a function using `functionName(arguments)`.
+
+---
+
+## **5. Control Flow**
+- **Conditional Statements:**
+  ```vintlang
+  if (condition) {
+      // Block
+  } else if (condition) {
+      // Block
+  } else {
+      // Block
+  }
+  ```
+- **Loops:** `for` and `while`.
+  ```vintlang
+  for i in array {
+      // Block
+  }
+
+  while (condition) {
+      // Block
+  }
+  ```
+
+---
+
+## **6. Input/Output**
+- **Print:** `print(arg1, arg2, ...)`.
+- **Write to a file or return output:** `write(content)`.
+- **Input:** `input(prompt)`.
+
+---
+
+## **7. Built-In Functions**
+- **Conversion:** `convert(variable, "TARGET_TYPE")`.
+- **Type Checking:** `type(variable)`.
+
+---
+
+## **8. Modules**
+- **`net`:** Networking utilities (e.g., HTTP requests like `net.get(url)`).
+- **`time`:** Date and time utilities:
+  - `time.now()`: Current timestamp.
+  - `time.isLeapYear(year)`: Check if a year is a leap year.
+  - `time.format(date, format)`: Format a date.
+  - `time.add(date, duration)`: Add time.
+  - `time.subtract(date, duration)`: Subtract time.
+- **`os`:** File system operations:
+  - `os.writeFile(filename, data)`.
+  - `os.readFile(filename)`.
+  - `os.fileExists(filename)`.
+  - `os.exit(code)`.
+- **`json`:** JSON utilities for encoding and decoding objects.
+
+---
+
+## **9. Strings and Arrays**
+- **String Operations:**
+  - `.split(delimiter)`: Split a string.
+  - Concatenate using `+`.
+- **Array Operations:**
+  - `.push(value)`: Add to an array.
+  - `.pop()`: Remove from the array.
+
+---
+
+## **10. Objects**
+- Use `{ key: value }` to define objects.
+- Access properties with `object["key"]`.
+
+---
+
+## **11. Error Handling**
+- Use `if` checks or appropriate conditions to validate operations (no explicit try-catch observed).

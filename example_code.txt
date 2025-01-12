@@ -1,0 +1,176 @@
+// Importing modules
+import net       // Importing networking module for HTTP operations
+import time      // Importing time module to work with date and time
+import os        // Importing operating system module for file operations
+import json      // Importing JSON module for encoding and decoding
+import uuid      // Importing UUID module for unique identifiers
+
+// Main logic to split and print characters of a string
+let name = "VintLang" // Define a string variable
+print("Splitting the string into characters:")
+let s = name.split("") // Split the string into characters
+for i in s { 
+    print(i) // Print each character
+}
+
+// Demonstrating type conversion and conditional statements
+let age = "10" // Define age as a string
+convert(age, "INTEGER") // Convert age string to integer
+print("Converted age to integer:", type(age)) // Print the new type of age
+
+// Conditional statements to compare the age variable
+if (age == 20) {
+    print("Age is 20")
+} else if (age == 10) {
+    print("Age is " + string(age))
+} else {
+    print("Age does not match expected values")
+}
+
+// Working with height variable
+let height = "6.0" // Height in feet
+print("My name is " + name)
+
+// Define a function to print details
+let printDetails = func(name, age, height) {
+    print("Details:")
+    print("Name: " + name)
+    print("Age: " + string(age))
+    print("Height: " + height + " feet")
+}
+
+// Calling the printDetails function with initial values
+printDetails(name, age, height)
+
+// Update height and call the function again
+height = "7"
+printDetails(name, age, height)
+
+// Print the current timestamp
+print("Current Timestamp:", time.now())
+
+// Function to greet a user based on the time of the day
+let greet = func(nameParam) {
+    let currentTime = time.now() // Get the current time
+    print("Current time is:", currentTime)
+    
+    // Simple time-based greeting logic (placeholder condition)
+    if (true) { // Replace with real-time logic as needed
+        print("Good morning, " + nameParam + "!")
+    } else {
+        print("Good evening, " + nameParam + "!")
+    }
+}
+
+// Time-related operations
+let year = 2024
+print("Is", year, "a Leap Year?", time.isLeapYear(year))
+print("Formatted Date:", time.format(time.now(), "02-01-2006 15:04:05"))
+print("Adding 1 hour to current time:", time.add(time.now(), "1h"))
+print("Subtracting 2 hours 30 minutes 45 seconds:", time.subtract(time.now(), "2h30m45s"))
+
+// Call the greet function with a sample name
+greet("John")
+
+// Example of a GET request using the net module
+print("Making a GET request to https://tachera.com")
+let res = net.get("https://tachera.com")
+print("Response:", res)
+
+// Built-in functions
+print("Type of 123:", type(123)) // Print the type of an integer
+let a = "123" // Initialize a string variable
+convert(a, "INTEGER") // Convert the string to an integer
+print("Converted 'a' to integer:", type(a), ", Value:", a)
+print("Hello", "World") // Print multiple values
+write("Hello World") // Write a string (useful for returning output)
+
+/*
+THIS IS A SIMPLE TERMINAL GAME WRITTEN IN VINTLANG
+*/
+
+// Game initialization
+let player = {
+    "name": "",
+    "health": 100,
+    "inventory": [],
+    "location": "start"
+}
+
+// Save game state to a file
+let saveGame = func () {
+    let saveData = json.encode(player)
+    os.writeFile("savegame.json", saveData)
+    print("Game saved successfully!")
+}
+
+// Load game state from a file
+let loadGame = func () {
+    if (os.fileExists("savegame.json")) {
+        let saveData = os.readFile("savegame.json")
+        player = json.decode(saveData)
+        print("Game loaded successfully!")
+    } else {
+        print("No saved game found. Starting a new game!")
+    }
+}
+
+// Display player stats
+let showStats = func () {
+    print("Player Stats:")
+    print("Name: " + player["name"])
+    print("Health: " + string(player["health"]))
+    print("Inventory: " + string(player["inventory"]))
+    print("Location: " + player["location"])
+}
+
+// Handle game events
+let handleEvent = func (event) {
+    if (event["type"] == "item") {
+        print("You found an item: " + event["name"])
+        player["inventory"].push(event["name"])
+    } else if (event["type"] == "enemy") {
+        print("An enemy appears: " + event["name"])
+        print("You lose 10 health!")
+        player["health"] -= 10
+    }
+    if (player["health"] <= 0) {
+        print("You died! Game Over.")
+        os.exit(1)
+    }
+}
+
+// Main game loop
+let gameLoop = func () {
+    while (true) {
+        print("\nYou are at: " + player["location"])
+        print("Choose an action: [explore, stats, save, quit]")
+        let action = input("> ")
+
+        if (action == "explore") {
+            print("Exploring...")
+            let event = {
+                "type": "item",
+                "name": "Mystic Key"
+            }
+            handleEvent(event)
+        } else if (action == "stats") {
+            showStats()
+        } else if (action == "save") {
+            saveGame()
+        } else if (action == "quit") {
+            print("Quitting game...")
+            os.exit(0)
+        } else {
+            print("Invalid action! Try again.")
+        }
+    }
+}
+
+// Start the game
+print("Welcome to the Adventure Game!")
+print("Enter your player name:")
+player["name"] = input(">>> ")
+
+print("Hello, " + player["name"] + "! Let's begin.")
+gameLoop()

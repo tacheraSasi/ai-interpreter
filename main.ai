@@ -1,0 +1,7 @@
+let a = 23
+
+let add = func (a,b){
+    return a+b
+}
+
+print(add(a,2))

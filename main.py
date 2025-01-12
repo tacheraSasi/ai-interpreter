@@ -19,8 +19,10 @@ else:
     file_name = (args[1])
     if  file_name.endswith(".ai"):
         content = getFileContent(file_name)
+        print(content)
+        sys.exit(1)
         
+    print("The file should end with '.ai'")
     
-    print(type(file_name))
     
                

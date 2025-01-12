@@ -1,5 +1,6 @@
-import os
+# import os
 import sys
+from interpreter import interpret
 
 args = sys.argv
 
@@ -20,7 +21,8 @@ else:
     file_name = (args[1])
     if  file_name.endswith(".vint"):
         content = getFileContent(file_name)
-        print(content)
+        output = interpret(content)
+        print(output)
         sys.exit(1)
 
     print("The file should end with '.ai'")

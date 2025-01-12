@@ -3,5 +3,53 @@ let a = 23
 let add = func (a,b){
     return a+b
 }
-
+print("The sum of ",a,"and 2 is ",add(a,2))
 print(add(a,2))
+
+
+
+// Main logic to split and print characters of a string
+let name = "VintLang" // Define a string variable
+print("Splitting the string into characters:")
+let s = name.split("") // Split the string into characters
+for i in s { 
+    print(i) // Print each character
+}
+
+// Demonstrating type conversion and conditional statements
+let age = "10" // Define age as a string
+convert(age, "INTEGER") // Convert age string to integer
+print("Converted age to integer:", type(age)) // Print the new type of age
+
+// Conditional statements to compare the age variable
+if (age == 20) {
+    print("Age is 20")
+} else if (age == 10) {
+    print("Age is " + string(age))
+} else {
+    print("Age does not match expected values")
+}
+
+// Working with height variable
+let height = "6.0" // Height in feet
+print("My name is " + name)
+
+// Define a function to print details
+let printDetails = func(name, age, height) {
+    print("Details:")
+    print("Name: " + name)
+    print("Age: " + string(age))
+    print("Height: " + height + " feet")
+}
+
+// Calling the printDetails function with initial values
+printDetails(name, age, height)
+
+// Update height and call the function again
+height = "7"
+printDetails(name, age, height)
+
+
+
+// Print the current timestamp
+print("Current Timestamp:", time.now())

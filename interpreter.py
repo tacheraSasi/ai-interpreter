@@ -2,13 +2,14 @@ import os
 from openai import OpenAI
 from dotenv import load_dotenv
 
-# Load API key from the .env file
+# Loads API key from the .env file
 load_dotenv()
 
-# Get the API key
+# Gets the API key
 api_key = os.getenv("OPENAI_API_KEY")
 client = OpenAI(api_key=api_key)
 
+#TODO:I will write a better instruction later
 def interpret(code: str, example_code: str, lang_rules: str) -> str:
     """
     Interprets a given code using the specified example and language rules
@@ -22,7 +23,7 @@ def interpret(code: str, example_code: str, lang_rules: str) -> str:
     Returns:
         str: The output of the code interpretation.
     """
-    # Prepare the prompt for the AI
+    # Prepares the prompt for the AI
     prompt = f"""
     You are the interpreter for the VintLang programming language.
     You have been given an example code: {example_code}
@@ -30,13 +31,15 @@ def interpret(code: str, example_code: str, lang_rules: str) -> str:
 
     Your task is to execute the following code:
     CODE: {code}
+    
+    AlSO:if the code is incorrect return a descriptive error message
 
     Only return the output of the code execution. Do not provide any extra text or explanation.
     """
 
-    # Make the API call to OpenAI
+    # Makes the API call to OpenAI
     completion = client.chat.completions.create(
-        model="gpt-4o-mini",  # Use the appropriate GPT model
+        model="gpt-4o-mini",  
         messages=[
             {"role": "system", "content": prompt},
             {
@@ -45,7 +48,11 @@ def interpret(code: str, example_code: str, lang_rules: str) -> str:
             }
         ]
     )
+    """
+        Will fix the scenario where the code passed in to the interpret is in correct
+        Where an error is supposed to occur
+    """
 
-    # Extract and return the output message
-    output_message = completion.choices[0].message['content'].strip()
+    # Extracts and returns the output message
+    output_message = completion.choices[0].message.content if completion.choices else "Oops!! Something went wrong"
     return output_message

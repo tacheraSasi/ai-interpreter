@@ -6,8 +6,6 @@ let add = func (a,b){
 print("The sum of ",a,"and 2 is ",add(a,2))
 print(add(a,2))
 
-
-
 // Main logic to split and print characters of a string
 let name = "VintLang" // Define a string variable
 print("Splitting the string into characters:")
